@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/background-placeholder.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 60px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .header img {
+            width: 100px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/home-placeholder.jpg') }}" alt="Home"></a>
+        <a href="{{ url_for('trainers') }}">Entrenadores</a>
+        <a href="{{ url_for('pokemons') }}">Pokemones</a>
+        <a href="{{ url_for('teams') }}">Equipos</a>
+        <a href="{{ url_for('battles') }}">Batallas</a>
+    </div>
+
+    <div class="container">
+        <h1>Bienvenido a la Penguindex</h1>
+        <p>Aquí puedes encontrar información sobre entrenadores, equipos, batallas y pokemones.</p>
+    </div>
+</body>
+</html>

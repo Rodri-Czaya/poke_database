@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batallas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/background-placeholder.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 60px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="date"], select, input[type="submit"] {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/home-placeholder.jpg') }}" alt="Home"></a>
+        <a href="{{ url_for('trainers') }}">Entrenadores</a>
+        <a href="{{ url_for('pokemons') }}">Pokemones</a>
+        <a href="{{ url_for('teams') }}">Equipos</a>
+        <a href="{{ url_for('battles') }}">Batallas</a>
+    </div>
+
+    <div class="container">
+        <h1>Lista de Batallas</h1>
+        <form method="post" action="{{ url_for('battles') }}">
+            <select name="team_1_id" required>
+                <option value="" disabled selected>Seleccione Equipo 1</option>
+                {% for team in teams %}
+                <option value="{{ team[0] }}">{{ team[1] }}</option>
+                {% endfor %}
+            </select>
+            <select name="team_2_id" required>
+                <option value="" disabled selected>Seleccione Equipo 2</option>
+                {% for team in teams %}
+                <option value="{{ team[0] }}">{{ team[1] }}</option>
+                {% endfor %}
+            </select>
+            <input type="date" name="date" required>
+            <input type="text" name="city" placeholder="Ciudad" required>
+            <select name="winner" required>
+                <option value="" disabled selected>Seleccione el Equipo Ganador</option>
+                {% for team in teams %}
+                <option value="{{ team[0] }}">{{ team[1] }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Registrar Batalla">
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Equipo 1</th>
+                    <th>Equipo 2</th>
+                    <th>Fecha</th>
+                    <th>Ciudad</th>
+                    <th>Ganador</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for battle in battles %}
+                <tr>
+                    <td>{{ battle[0] }}</td>
+                    <td>{{ battle[1] }}</td>
+                    <td>{{ battle[2] }}</td>
+                    <td>{{ battle[3] }}</td>
+                    <td>{{ battle[4] }}</td>
+                    <td>{{ battle[5] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
